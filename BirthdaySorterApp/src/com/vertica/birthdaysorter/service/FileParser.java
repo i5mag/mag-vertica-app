@@ -10,11 +10,16 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.vertica.birthdaysorter.exception.BirthdaySorterException;
 import com.vertica.birthdaysorter.model.BirthdayVO;
 
+/**
+ * @author i5mag
+ *
+ */
 public class FileParser {
 
-	public List<BirthdayVO> parseInputFile(String filePath) {
+	public List<BirthdayVO> parseInputFile(String filePath) throws BirthdaySorterException{
 		
 		List<BirthdayVO> birthdayVOList = new CopyOnWriteArrayList<BirthdayVO>();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy");
@@ -30,13 +35,13 @@ public class FileParser {
 				birthdayVOList.add(new BirthdayVO(cells[0], simpleDateFormat.parse(simpleDateInput) ));
 			}
 		} catch (FileNotFoundException ex) {
-			ex.printStackTrace();
+			throw new BirthdaySorterException("The input file is not found at the specified path.");
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			throw new BirthdaySorterException("Unable to read the input file.");
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			throw new BirthdaySorterException("The input data is invalid/corrupted and could not be processed.");
 		} catch (ParseException e) {
-			e.printStackTrace();
+			throw new BirthdaySorterException("The input data is invalid/corrupted and could not be processed.");
 		}
 		
 		return birthdayVOList;

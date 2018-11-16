@@ -3,6 +3,10 @@ package com.vertica.birthdaysorter.model;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * @author i5mag
+ *
+ */
 public class BirthdayVO implements Comparable<BirthdayVO> {
 	
 	private  String personId;
@@ -68,9 +72,9 @@ public class BirthdayVO implements Comparable<BirthdayVO> {
 		
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(personId);
-		buffer.append("\t");
+		buffer.append("\t\t\t");
 		buffer.append(calendar.get(Calendar.MONTH) + 1);
-		buffer.append("\t");
+		buffer.append("\t\t");
 		buffer.append(calendar.get(Calendar.DATE));
 		buffer.append("\t");
 		buffer.append(calendar.get(Calendar.YEAR));
